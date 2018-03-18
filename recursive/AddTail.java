@@ -26,31 +26,27 @@ public class AddTail {
 
 		public void printAll() {
 
-			Node temp=head;
-        	if(temp==null)return;
-        	System.out.printf("%d ", temp.value);
-        	temp.printAll();
-        	
-        	/*
-        	Node temp=head;
-        	
-        	while(temp!=null){
-        		System.out.printf("%d ", temp.value);
-        		temp=temp.next;
-        	}
-        	*/
-			
-			
+
+			Node temp = new Node(this.value,this.next);
+
+			while(temp!=null){
+				System.out.printf("%d ", temp.value);
+				temp=temp.next;
+			}
+
 		}
 
 		public void addTail(int value) {
-			Node head=new Node(0,null);
 
-			Node newNode=new Node(value,null);
+			Node root = new Node(this.value, this.next);
 
-			head.next=newNode;
-			
-		}
+	         while(root != null) {
+	            root = root.next;
+	         }
+
+	         Node nn = new Node(value, null);
+	         root = nn;
+	      }
 	}
 
 
