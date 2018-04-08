@@ -1,6 +1,8 @@
 package sort;
 
-public class Person implements Comparable<Person>{
+import java.lang.String;
+
+public class Person {
 	String name;
 	int age;
 	
@@ -30,10 +32,5 @@ public class Person implements Comparable<Person>{
 	public String toString() {
 		return String.format("Person{name=\"%s\",age=%d}",name,age);
 	}
-	@Override
-	public int compareTo(Person p) {
-		int r=this.name.compareTo(p.name);//먼저 이름 비교
-		if(r!=0)return r;//이름이 같지 않다면, 이름 비교 결과 리턴
-		return this.age-p.age;//이름이 같다면, 나이 비교 결과 리턴
-	}
+
 }
