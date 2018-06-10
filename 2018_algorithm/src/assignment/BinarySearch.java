@@ -12,13 +12,21 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 
 
-class WordInfoComparator implements Comparator<WordInfo> {
-    public int compare(WordInfo w1, WordInfo w2) {
-    	return w1.word.compareTo(w2.word);
-    }
+class WordInfoComparatorByWord implements Comparator<WordInfo> {
+	@Override
+	public int compare(WordInfo w1, WordInfo w2) {
+		return w1.word.compareTo(w2.word);
+	}
+}
+class WordInfoComparatorByCount implements Comparator<WordInfo>{
+	@Override
+	public int compare(WordInfo c1, WordInfo c2) {
+		return c2.count-c1.count;
+	}
 }
 public class BinarySearch {
 	static final String 텍스트파일 ="C:\\Users\\jihye\\Desktop\\text.txt";
@@ -38,6 +46,7 @@ public class BinarySearch {
 					break;
 				}
 			}
+
 		}
 		if(builder.length()>0) {
 			System.out.print("채워진 알파벳 문자가 있다면, 그 단어 리턴한다.");
@@ -50,56 +59,64 @@ public class BinarySearch {
 		}
 	}
 
-	static void sortByCountDesc(ArrayList<WordInfo> a) { // WrodInfo 목록을 정렬한다. insertion sort
-		for (int i = 1; i < a.size(); ++i) {
-			WordInfo value = a.get(i);
-			int j;
-			for (j = i - 1; j >= 0; --j)
-				if (a.get(j).count < value.count) // WordInfo의 count 멤버 변수 값의 내림차순 정렬
-					a.set(j + 1, a.get(j));
-				else break;
-			a.set(j + 1, value);
-		}
-	}
+	public static WordInfo findWord(ArrayList<WordInfo> list, String word) { // WordInfo 목록에서 단어를 찾아서 리턴한다
+		int start=0;
+		int end=list.size()-1;
+		WordInfoComparatorByWord byword = new  WordInfoComparatorByWord();
+		Collections.sort(list,byword);
+		while(start<=end) {
+		
+			
+			int middle =(start+end)/2;
 
-	static int findWord(ArrayList<WordInfo> list, String word, int start, int end) { // WordInfo 목록에서 단어를 찾아서 리턴한다
-		if(start>end) {
-			list.add(new WordInfo(word, 1));
-			return start;
+			WordInfo com = list.get(middle);
+
+			int compare = com.word.compareTo(word);
+
+			if(compare==0) {//바로 찾으면
+				System.out.println("찾았따!!");
+				return list.get(middle);
+			}else if(compare<0) {//word가 작을때
+				start = middle+1;
+
+			}else  if(compare>0) {//word가 클때
+				end = middle-1;
+			}
 		}
-	
-		int middle =(start+end)/2;
-		
-		WordInfo com = list.get(middle);
-		int compare = com.word.compareTo(word);
-		
-		if(compare==0) {//바로 찾으면
-			com.count++;
-			return middle;
-		}else if(compare<0) {//word가 작을때
-			return findWord(list, word, start, middle-1);
-		}else  if(compare>0) {//word가 클때
-			return findWord(list, word, middle+1, end);
-		}
-		
+		return null;
+
 	}
 
 	public static void main(String[] args) throws Exception {
 		BufferedReader reader = new BufferedReader(new FileReader(텍스트파일));
+
 		ArrayList<WordInfo> a = new ArrayList<WordInfo>(); // WordInfo를 저장할 ArrayList 객체 생성
+
+		WordInfoComparatorByWord byword = new  WordInfoComparatorByWord();
+		WordInfoComparatorByCount bycount = new  WordInfoComparatorByCount();
+
 		String word;
+
 		while ( (word = getWord(reader)) != null) { // 텍스트 파일에서 단어를 하나씩 읽어온다
 			word = word.toLowerCase();              // 단어를 소문자로 변환한다
 			System.out.print("main에서 소문자로 변환한 값:");
 			System.out.println(word);
-			findWord(a, word, 0, word.length()); // WordInfo 목록에서 word를 찾는다
+
+			WordInfo wordInfo = findWord(a,word); // WordInfo 목록에서 word를 찾는다
 			System.out.println("findWord메소드 실행함");
-		
+			if (wordInfo != null) {
+				wordInfo.count++; // 찾았으면 ++count 
+				System.out.println("증가함");
+			}else {                 
+				a.add(new WordInfo(word, 1));   // 못찾았으면 새 단어 등록
+				Collections.sort(a,byword);
+			}
 		}
 
-		sortByCountDesc(a); // WordInfo 배열을 count 내림차순으로 정렬한다.
+		Collections.sort(a,bycount); // WordInfo 배열을 count 내림차순으로 정렬한다.
+
 		for (int i = 0; i < 10; ++i) // 선두 10 개 단어 출력
-		   System.out.printf("%s %d\n", a.get(i).word, a.get(i).count);
+			System.out.printf("%s %d\n", a.get(i).word, a.get(i).count);
 	}
 
 }
