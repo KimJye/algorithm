@@ -1,4 +1,6 @@
-# 2018_algorithm: 2018 ¾Ë°í¸®Áò ¼ö¾÷½Ã°£ °ü·Ã ¹®Á¦µé
-# BackJun: BackJun ¹®Á¦µé
-# codility: codility ¹®Á¦µé
-# programmers : programmers ¹®Á¦µé
+# algorithm
+
+* ** 2018_algorithm : ** 2018 ì•Œê³ ë¦¬ì¦˜ ìˆ˜ì—…ì‹œê°„ ê´€ë ¨ ë¬¸ì œë“¤
+* ** BackJun :** BackJun ë¬¸ì œë“¤
+* ** codility :** codility ë¬¸ì œë“¤
+* ** programmers :** programmers ë¬¸ì œë“¤
