@@ -63,7 +63,7 @@ public class P11723_집합 {
 				break;
 
 			case"all":
-				bitmask = bitmask | (1<<21)-1;
+				bitmask = bitmask | (1<<21)-1;//왜 21일까
 				break;
 
 			case"empty":
