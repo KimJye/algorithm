@@ -1,0 +1,28 @@
+﻿20180515 알고리즘 수업 필기
+
+* boundary condition : 경계 조건
+ - 값을 기준 : 최댓값, 최소값
+ - 위치 기준 : 선두, 후미
+ - 양 기준 : empty, full
+ - 시간 기준 : 최초, 마지막
+-> 이러한 경계 조건들에서 버그가 가장 많다.
+
+* Codility OddOccurenceInArray문제 시간 복잡도: O(nlogn), 공간 복잡도: O(1)
+
+* HashMap : key로 value를 지정하는 객체
+ - 기본자료형은 못넣는다.
+ - maps.containsKey() 값이 들어있느냐
+ - int count = map.get() 들어있다면 값을 가져와서 넣어라
+ - 시간 복잡도 O(n), 공간 복잡도 : O(n)
+
+* 기본자료형은 ++i가 가능하지만 Integer 객체는 int obj = int obj+1;로 해줘야 한다.
+
+* Codility CyclicRotation 문제
+ - 인덱스가 0부터 시작하고 n개가 들어있고
+ - 회전은 오른쪽으로 k만큼 옮김.
+ - 회전했을 경우에 맨 마지막 항목은 인덱스 0 으로.
+ - 3,8,9,7,6  and k=3 -> 9,7,6,3,8이다.
+ - 다 구현하고 난다음에 boundary condition을 조심하자.
+ - Assume that: 부분을 잘 읽어보자.
+ - boundary condition : 빈 배열을 넣었을 때
+ 

@@ -1,0 +1,34 @@
+﻿20180416<알고리즘 수업 필기> i번째 값 찾기 알고리즘!
+
+* heap은 언제나 complete binary tree이기때문에 최악의 경우가 없다. 이진트리에서 최악의 경우는 한쪽으로 길게 늘어진 경우인데 heap은 complete binary tree이다.
+
+* 구현시험
+1. 효울적인 알고리즘으로 구현 성공
+2. 비효율적인 알고리즘으로 구현 성공
+3. 효율적인 알고리즘 구현 실패
+
+* 자바의 sort는 arrays.sort와 collections.sort가 있다. arrays.sort는 배열을 sort할때, collections.sort는 리스트를 배열할때.
+ 자바에서 sort는 퀵소트를 구현해 놓은 것이다.
+
+* sort를 하면 nlogn이다. 
+  i번째 작은 값은 n에 비례하는(선형시간) 알고리즘이 있다.
+  
+* 재귀호출(깊이)가 quick sort 와 선택 값 찾기 알고리즘이가 같다. 
+  재귀호출 깊이는 종료조건에 따라 다르다.
+  
+  선택 값 찾기 알고리즘은 n에 비례한다. quick sort는 nlogn이다.
+
+  소스 코드형태는 매우 비슷하지만 수행시간이 이렇게 차이가 난다.
+
+* 언제나 가운데 값을 기준값으로 사용하겠다할때 partition 개선 코드
+  static int partutuib(int[]a, int start, int end){
+	int middle = (start+end)/2;  //
+	swap(a,end,middle);          //  -> 이 두 문장을 추가함으로써 최악의 경우(한가운데 기준 값이 계속 최댓값일때) 확률을 매우 낮춰준다. 
+	int value = a[end];
+	int i=start -1;
+	for(int j=start; j<=end -1;++j)
+		if(a[j]<value)
+		  swap(a,++i,j);
+	swap(a,i+1,end);
+	return i+1;
+

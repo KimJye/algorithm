@@ -1,0 +1,32 @@
+﻿2018/03.14 알고리즘 수업 필기<점화식과 점근적 복잡도>
+
+퀵 정렬 -> 기준값에서 작은값들 왼쪽으로 큰값은 오른쪽으로 쪼개는 복잡함 그러나 merge할때는 더 간단.
+병합 정렬 -> 가운데 그냥 쪼갬. 하나하나 비교해서 merge함.
+
+ex)
+->병합(merge) 정렬
+ size n 배열 정렬 sort(a,시작인덱스, 끝인덱스)
+	sort(a,0,start.end)
+현단계 작업: merge(a,start,middle+1)
+
+이전단계 작업(재귀호출): middle=(start+end)/2;
+			sort(a,start,middle);
+			sort(a,middle+1,emd);
+종료 조건: if(start==end) return;
+
+
+ex) Example4
+
+search1=선형
+search2=이진탐색
+serach3=이진탐색을 재귀호출하기
+
+	search3
+현단계: middle=(start+end)/2;
+	//찾앗을때if(a[middle]==value)return middle; 
+
+다음단계://못찾앗을때 재귀호출
+	if(a[miidle]>value)//왼쪽에서 찾기 search3(a,start,middle-1);
+	else if(  <) //오른쪽에서 찾기 serach3(a,middle+1,end);
+
+종료조건: if(start>end)//배열크기가 0일때 return -1; 

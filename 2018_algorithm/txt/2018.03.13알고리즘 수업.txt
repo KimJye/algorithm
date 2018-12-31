@@ -1,0 +1,37 @@
+﻿2018.03.13 알고리즘 수업 필기
+
+static 메소드는 this가 없다.
+
+
+ex) static void prinf(Node p)
+현재: printf("%d",p.value);
+
+재귀: printf(p)
+
+종료:if(node.value==null) return;
+
+-> static 없이하기
+
+	void printf()
+현재: printf("%d",this.value);
+
+재귀: this.leftChild.printf();
+
+종료: if(this.leftChild==null);return;
+
+
+ex) static boolean constrains(Node node, int value)
+현재: if(node.value==value) return true;
+	else
+
+다음: constrains(node.leftChild,value);
+
+종료 조건: if(node==null) return false;
+
+-> static 없이하기
+	boolean contains(int value)
+현재: if(this.value==value) return true;
+
+재귀: this.leftChild.contains(value)
+
+종료 조건: if(this.leftChild==null) return false;

@@ -1,0 +1,38 @@
+﻿20180402 알고리즘 수업 필기
+
+*Quick Sort와 merge Sort의 둘 다 시간 복잡도는 O(nlogn)이다.
+*Quick Sort와 merge Sort비교시 merge sort 의 단점: merge 작업에 여분의 공간(O(n))이 필요하다.(n의 비례하는 공간이 필요하다.)
+*라이브러리에 들어있는 sort는 거의다 quick sort임 quick sort 가 merge sort의 단점을 보완한것임.
+*quick sort와 merge sort의 공통점은 1. 반으로 쪼갠다.(partition) 2. 앞 부분 정렬 재귀 호출 3. 뒷 부분 정렬 재귀호출 4. merge
+*quick sort와 merge sort의 차이: merge sort는 그냥 반으로 쪼개고 quick sort는 나눌때 하나씩 하나씩 나눈다. 
+				 기준점에 따라서 나눈다. 그래서 merge할때 또 비교할 필요가 없다. 
+				 하지만 merge sort는 merge할때 하나하나 비교한다.
+
+* 정렬 구현 Tip
+1. 사례적기
+2. 사례보고 규칙적기
+3. 그 규칙을 코딩하기
+
+*quick sort 
+- j값은 바깥쪽 루프
+- i 값은 2구역의 첫번째 값, i는 swap 할때 1증가하고 swap하지않으면 1증가하지 않는다. 
+- i의 초기값은 0으로 초기화할 수 있다. 이럴때는 swap하고 i값을 ++하면 된다. 그렇게되면 2구역의 첫번째 값 다음값을 가리킨다. 
+- i값을 -1로 하면 ++해놓고 swap한다.이럴때는 2구역의 첫번째 값을 가리킨다.
+- j값은 end-1까지 가면 된다.
+- 마지막으로 기준값은 2구역의 시작지점과 swap 한다.
+
+- 정리: i값이 1구역의 끝 값일때는 i=-1로 초기화    |   i값이 2구역의 시작일 떄는 i=0으로 초기화. 
+			j 위치의 값과 기준값 비교 결과 j 위치의 값이 작은 경우
+	
+	++i					   |    swap(a,i,j)
+	swap(a,i,j)				   | 	 ++i
+	(방금 swap된 i구역 값의 위치=i   	   | 	(방금 swap된 i구역 값의 위치+1==i)
+
+* Tail
+* Recussion
+* Elimination
+* Optimiztion
+* (특정 재귀호출 구현시) TRE 최적화(컴파일러) -> 꼬리 재귀호출 제거-> 반복문으로 변환 --> quick sort의 또다른 장점이다.
+* 재귀호출의 마지막 문장이 단순 재귀호출로 끝날 경우(재귀호출 단순호출) 가능하다.
+* 퀵소트의 단점이 기준값을 잘못 고를때가 worst case 이고 재귀호출은 n-1회이다. 기준값이 반으로 딱 쪼개진 경우가 best 경우이다.
+* 이미 정렬되어있는 경우에 최악의 경우이다. -> bubble sort는 이미 정렬되어있는 경우가 최고의 경우이다.

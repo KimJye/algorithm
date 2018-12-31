@@ -1,0 +1,54 @@
+﻿
+*기술면접 답변요령 - 비교하여 장단점 얘기하기
+	 	   - 경험~해봤는데 ~느꼈더라
+
+*자바에서 중요한 것들 
+- interface
+- exception
+- generic
+
+* garbage collection
+
+	c같은경우는 malloc으로 메모리를 할당하고 반환을 free로 한다.
+	java같은 경우는 new로 메모리를 할당하고 그 객체를 아무도 참조하지 않을때(아무도 사용안할떄) 자동으로 반환해준다. 
+	garbage collection을 하는 도중에는 jvm이 아무것도 안하고 garbage 작업만한다 이럴때를 stop the world라고 한다.
+	특히 은행시스템,미사일방어시스템같은거가 jvm먹통(버그)되는것이 문제임.
+`	클래스.변수면 인스턴스(클래스멤버)변수이다.
+	System.gc()메소드->garbage collection실행하는 메소드
+	java garbage collectino을 도와주기위해 우리는 해당 객체변수에 null로 지정한다. 그렇다면 더이상 그 변수를 참조안하기 때문에
+	jvm이 알아서 garbage collection을 실행해준다.
+	java객체에서 대부분의 객체는 금방 접근 불가능상태가 되고 오래된 객체에서 젊은 객체로의 참조는 아주 적게 존재한다.
+	jvm garbage collection은 old영역과 young영역으로 분리되어있다.
+	young 영역은 객체 생성시이다. young영역에 대해서는 minor garbage collection을 자주실행한다.그리고 오래 살아남은 객체는 old영역으로 올려보낸다.
+	old 영역에 올라간 객체는 Major garbage collection을 가끔 실행한다. 
+	young generation 영역을 찾을때 Old generationi영역도 찾아보고 gc작업을 한다. 이 부분을 보완하기 위해서 card Table 구조를 생각해냈다.
+ 	old 영역에서 yount 영역을 참조할 경우에는 특별히 card table에 따로 기입을 한다. 그리고 더이상 참조하지 않을때는 card table에서 지운다.
+	이때 일반적으로는 card table을 새로고침해야한다는 번거러움이 있지만 minor gb할때는 young영역과 card table만 참조하는 장점이 더 크다.
+	
+	- 키워드: young,old, minor, major, null,jvm, card table
+	- 요점 : 대부분의 자바 객체는 금방 gb 대상이 된다. 그렇기 때문에 jvm의 gb는 방금 그 특성에 따라 객체를 young generatino,old generatino로 나눠서 gb를하고
+		 young generatino에 있는 객체는 금방 gb 대상이 되어서 gb를 자주하고 old generatino는 gb를 자주하지 않는다. 
+		 이렇게 나눠서 gb를 효율적으로 한다.
+		 young generatino할때 old generatino참조하는 객체를 쉽게 파악하기 위해서 card table을 사용한다.
+
+	- Young은 서바이버2개영역과 에덴영역으로 구성되어있다. 
+	  에덴영역에 객체가 꽉차면 두 서바이버 영역중에서 비어있지 않은 영역에 채우고 꽉차면 비어있는 
+	  다른 서바이버로 또 옮기고 객체가 살아남아있는 횟수를 일정횟수 넘으면 old영역으로 올린다.
+
+	- old 영역의 gc는 mark-sweep-compact이라는 알고리즘을 사용한다. 이 알고리즘의 첫 단계는 old 영역에 살아 있는 객체를 식별(mark)하는 것이다.
+	  그 다음에는 heap 의 앞 부분부터 확인하여 살아 있는 것만 남긴다(sweep).
+	  마지막 단계에서는 각 객체들이 연속되게 쌓이도록 힙의 가장 앞 부분부터 채워서 객체가 존재하는 부분과 객체가 없는 부분으로 나눈다.(Compaction)
+	
+ 	- 멀티스레드로 일한다. 요즘 cpu 코어가 여러개임.
+	- serial gc 보다 parallel gc를 쓰는게 더 효율적이고 빠르다. gb할때 stop the world임
+	- parallel old gc는 parallel gc다음 버전인 가장 최신 버전이다.	parallel old gc는 mark-summary-compaction 알고리즘을 사용한다.
+
+	- cms gc 방식: stop the world를 일으키지 않고 gc를 할 수 있는 방식임. 
+		기존 방식들은 stop the world가 길다.
+		이 방식은 initial mark,remark만 stop the world이고 concurrent mark 와 concurrent sweep은 stop the world가 아니다. 
+		이것의 장점은 stop the world시간이 짧다.
+		이것의 단점은 mark와 sweep은 보이지만 compaction을 하지 않는다. compaction을 하지 않으면 단편화가 된다.
+
+	-g1 gc 방식
+
+	

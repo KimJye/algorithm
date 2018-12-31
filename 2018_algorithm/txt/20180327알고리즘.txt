@@ -1,0 +1,37 @@
+﻿20180327 알고리즘
+
+Comparable 인터페이스
+->크고 작음,순서을 비교할 수 있는 객체(클래스)
+
+예외적으로 Compareable 인터페이스를 안한 클래스는 StringBuilder이다. 이유는 StringBuilder은 임시로 문자열 비교할때 잠깐 쓰기때문.
+따라서 보관이나 정렬, equals메소드는 StringBuilder 클래스에서 사용못한다. 특히 equals 메소드는 재정의가 되어있지 않다.
+StringBuilder 은 빌드할때 잠깐쓰고 빌드 후 String 으로 변환 후 쓴다.
+
+Person 클래스
+-> comparable 인터페이스해도 되지만 comparator 인터페이스를 implements 해서 비교하는게 더 나음
+*comparable 은 비교 방법 한개
+*comparator 은 비교 방법 여러개
+
+compareTo(Person p, 기준)
+	switch(기준)
+	 case1~~~~~
+	 case2~~~~~
+이렇게 구현해도 가능하나 바람직하지 않다. 이유는 유지보수성때문이다.객체지향적으로 좋은 구조가 유지보수가 적은 코드다.
+compareTo 메소드는 기준이 늘어날때가 있어서 유지보수가 많이 든다.
+따라서 compareTo 메소드를 기준으로 별도의 클래스로 정하는게 유지보수측면에서 좋다.
+그래서 peroson 클래스 비교하는 메소드를 personNameComparator.java로 빠져나왔다. 이것은 유지보수성 때문이다.
+
+*compareTo(Person p)//parameter 1개인 경우
+
+*제네릭 문법
+-> 타입 안전을 위해 사용한다. 타입 실수를 막을 수 있다. 컴파일러가 타입 검사를 해준다. 꺼낼때도 맞는 타입만 꺼낼 수 있다. 
+
+* 숙제 *
+  1. 값은 value일때 put과 get 메소드를 구현하는 클래스를 만들어라.
+  put(value);
+  get() return value; ex) Person p =(Person)a.get(3);
+
+  2. 1을 제네릭 형식으로 구현하라.
+
+* 알고리즘 구상 훈련
+

@@ -1,0 +1,53 @@
+﻿20180523 알고리즘 수업 필기
+
+* 해시 테이블
+
+총 8칸
+- 2칸씩 점프 : 0,2,4,6,0,2,4,6...
+- 4칸씩 점프 : 0,4,0,4,..
+- 6칸씩 점프 : 0,6,4,2,0,6,4,2...
+
+총 9칸
+- 6칸씩 점프: 0,6,3,0,6,3...
+
+=>공약수가 있으면 그 공약수만큼만 점프하면 제자리로 돌아가는 문제가 벌어진다.
+이것을 해결하려면 배열의 크기 또는 점프하는 간격 중 둘중하나가 소수이면 된다.
+
+* multiplication method : 배열의 크기를 소수로 할 필요가 없다.
+
+* Division Method : 배열의 크기를 소수로 해야한다.
+
+
+* swicth 문을 배열로 짜보기(value가 음수일 경우도 구현)  
+private static int getStepDistance(int value) { // 충돌 발생한 경우 건너뛸 간격 계산   
+          int r = 0;        
+     switch (value % 7) {   //value가 음수일 경우에 버그!
+          case 0: r = 3; break;      
+       case 1: r = 5; break;     
+        case 2: r = 7; break;      
+       case 3: r = 11; break;     
+        case 4: r = 13; break;    
+         case 5: r = 17; break;    
+         case 6: r = 19; break;      
+       }       
+      return r;   
+      }
+=> 배열로 바꾸기
+static final int[] STEPS={3,5,7,11,13,17,19};
+private static int getStepDistance(int value){
+	if(value<0) value=-value;
+	return STEPS[value%7];
+
+* 자바 Object클래스에서 hashCode,equals메소드는 재정의 필요하다.
+
+* 재정의 할 때 유용한 Objects라는 클래스를 쓰면 편하다.
+
+* hashCode 코드 값이 같으면 내용이 다를 수 있다. 반대로 내용은 다르지만 해쉬코드 값은 같을 수가 있다.
+
+* Objects 클래스 쓰기
+ 객체일 경우 : Objects.equals(this.name, p.name) - null값 계산은 자동으로 해준다.
+ 배열일 경우 : Arrays.equals를 쓰면 된다. - 배열 길이 자동으로 해준다.
+ 해쉬코드는 : Objcets.hash를 쓰면 모든 변수에 hash 값을 나열해준다.
+
+* 해쉬 테이블 알고리즘에서 해쉬코드 메소드 재정의 안하면 해쉬코드 값이 부정확하면 효율이 떨어진다.
+

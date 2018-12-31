@@ -1,0 +1,76 @@
+﻿
+<binary tree> 에서 remove 
+
+class BinaryTree{
+	Node root = null;
+
+	public void remove(int value){
+		if(root ==null) return;
+
+		//root 노드가 교체되는 경우
+		//삭제할 value가 root.value 일치.
+		// root의 자식이 한 개
+		if((value==root.value) &&
+		   ( (root.left == null && root.right !=null) ||
+		     (toot.left != null && root.right ==null))){
+		
+		   this.root = (root.left == null) ? root.right : root.left;
+		}else(// root 노드가 교체되는 경우가 아님
+			root.remove(value,null);
+		}
+	     }
+	}
+
+---------------------------------------
+<업그레이드>
+
+// root 노드의 자식이 없을 때도
+// root 노드가 교체됨. null 로 교체
+class BinaryTree{
+	Node root = null;
+
+	public void remove(int value){
+		if(root ==null) return;
+
+		//root 노드가 교체되는 경우
+		//삭제할 value가 root.value 일치.
+		// root의 자식이 한 개 null 이거나, 둘다 null일때
+		if((value==root.value) &&
+		   ( root.left == null && root.right !=null) ){
+		
+		   this.root = (root.left == null) ? root.right : root.left;
+		}else(// root 노드가 교체되는 경우가 아님
+			root.remove(value,null);
+		}
+	     }
+	}
+
+
+
+-------------------------------
+dummy 노드쓰는 경우는 null 확인 안해도 되는것.
+연결리스트를 쓰는 경우는 head 와 tail의 단점을 보완하여 tail만 쓰도록 한다. 이럴때는 root.add와 root.contain이 빠르다.
+dummy 노드와 연결리스트를 동시에 쓰는 경우는 null 확인 안해도 되고 빠르다.
+
+static 쓰면 null 확인이 짧다.
+
+
+
+
+
+-----------------------------------------
+<레드블랙트리>
+- 거의 균형. 시간이 덜 걸려서 보통 레드블랙트리를 쓴다.
+- 2배 미만으로 길다.
+- 블랙 노드는 완벽한 균형이고, 레드는 균형을 무시한다.
+- 따라서 레드노드 다 제거 하고 블랙노드만 그리면 완벽한 노드가 된다.
+- 레드노드가 위아래로 연속일 수가 없다.-> 2배 미만으로 길다의 규칙을 지킨다.
+- 가장 많이 레드를 넣는 방법은, 블랙, 레드 블랙 레드 이런색으로 사이사이 넣어준다.
+- 일단 루트는 블랙이어야 한다.
+- 모든 리프는 블랙이다.
+- 루트 노드에서 임의의 리프 노드에 이르는 경로에서 만나는 블랙 노드의 수는 모두 같다. -> 블랙 노드는 완벽한 균형 트리
+- null 노드는 블랙이다. 
+- 레드블랙도 이진트리지만 균형잡힌 것이다.
+
+- 삽입할때 방금 넣은 것은 무조건 레드이다.
+
