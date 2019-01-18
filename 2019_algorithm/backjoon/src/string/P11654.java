@@ -15,13 +15,14 @@ import java.util.Scanner;
                  출력 : 입력으로 주어진 글자의 아스키 코드 값을 출력한다.
 
  * solution : 문자열 문제
-
+              charAt-'0' 은 문자를 숫자로 바꿀때.
+              이 문제는 문자의 아스키 코드 값을 출력.
  */
 public class P11654 {
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
-        int input = sc.next().charAt(0);
-
-        System.out.println(input);
+        //int input = sc.next().charAt(0);
+        char str = sc.next().charAt(0);
+        System.out.println((int) str);
     }
 }
