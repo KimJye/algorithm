@@ -65,7 +65,7 @@ public class P2108 {
 		}
 
 		// 중복 제거
-		Map<Integer, Integer> hashMap = new HashMap<>();
+		Map<Integer, Integer> hashMap = new HashMap<>(); //
 
 		for (int i = 0; i < a.length; ++i) {
 			int key = a[i];
