@@ -39,12 +39,12 @@ public class P2108 {
 			sum += i;
 		}
 
-		double result = (double)sum / a.length;
+		double result = (double) sum / a.length;
 
 		// 음수
-		if(result<0){
-			result *=-1;
-			return (int) (Math.round(result))*-1;
+		if (result < 0) {
+			result *= -1;
+			return (int) (Math.round(result)) * -1;
 		}
 
 		return (int) Math.round(result);
@@ -77,22 +77,35 @@ public class P2108 {
 		}
 		// 최빈값 중 두번째로 작은 값 찾기
 		List<Integer> list = sortByValue(hashMap);
-		int maxValue = hashMap.get(list.get(0));
-		int min = list.get(0);
-		int result=min;
-
-		for(int i=1; i<list.size(); ++i){
-			if((hashMap.get(list.get(i)) == maxValue)){
-				if(list.get(i)<min){
-					result = min;
-					min = list.get(i);
-				}
-				else if((list.get(i)> min && list.get(i)<result) || min == result)
-					result = list.get(i);
+		for(int i : list){
+			System.out.print(i +" ");
+		}
+		if ((hashMap.get(list.get(0))) == (hashMap.get(list.get(1)))) {
+			if(list.get(0)>list.get(1)){
+				return list.get(0);
+			}else{
+				return list.get(1);
 			}
 		}
+		return list.get(0);
 
-		return result;
+////
+////		int maxValue = hashMap.get(list.get(0));
+////		int min = list.get(0);
+////		int result=min;
+////
+////		for(int i=1; i<list.size(); ++i){
+////			if((hashMap.get(list.get(i)) == maxValue)){
+////				if(list.get(i)<min){
+////					result = min;
+////					min = list.get(i);
+////				}
+////				else if((list.get(i)> min && list.get(i)<result) || min == result)
+////					result = list.get(i);
+////			}
+////		}
+//
+//		return result;
 	}
 
 	// Value 기준 내림차순 정렬
@@ -104,7 +117,7 @@ public class P2108 {
 			public int compare(Object o1, Object o2) {
 				Integer v1 = map.get(o1);
 				Integer v2 = map.get(o2);
-				return (v1>v2) ? -1 : ((v1==v2)? 0 : 1 );
+				return (v1 > v2) ? -1 : ((v1 == v2) ? 0 : 1);
 			}
 		});
 
