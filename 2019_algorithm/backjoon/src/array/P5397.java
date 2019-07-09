@@ -39,24 +39,35 @@ public class P5397 {
 
 		int N = Integer.parseInt(br.readLine());
 
-		while(N-- >0){
+		while (N-- > 0) {
 			String input = br.readLine();
 			LinkedList<Character> list = new LinkedList<>();
 
 			ListIterator<Character> iterator = list.listIterator();
 
-			for(char c : input.toCharArray()){
-				switch (c){
-					case '<' : if(iterator.hasPrevious()) iterator.previous(); break;
-					case '>' : if(iterator.hasNext()) iterator.next(); break;
-					case '-' : if(iterator.hasPrevious()){
-						iterator.previous();
-						iterator.remove();;
+			for (char c : input.toCharArray()) {
+				switch (c) {
+					case '<':
+						if (iterator.hasPrevious()) {
+							iterator.previous();
+						}
 						break;
-					}
-					default: iterator.add(c);
+					case '>':
+						if (iterator.hasNext()) {
+							iterator.next();
+						}
+						break;
+					case '-':
+						if (iterator.hasPrevious()) {
+							iterator.previous();
+							iterator.remove();
+						}
+						break;
+					default:
+						iterator.add(c);
 				}
 			}
+
 			for (char c : list) {
 				bw.write(String.valueOf(c));
 			}

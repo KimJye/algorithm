@@ -48,7 +48,9 @@ import java.util.StringTokenizer;
 		4
 
 		이것은 index = (index+K-1)%list.size()
-		 */
+
+
+*/
 public class P1158 {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -69,6 +71,9 @@ public class P1158 {
 			index = (index + K -1) % list.size();
 			resultList.add(list.remove(index));
 		}
+		// O(n^2)임. remove가 O(n)임. LinkedList도 remove시 해당 index까지 가는것이 n에 비례하기 때문에 이또한 O(n^2)이다.
+		// LinkedList.Listiterator.remove는 O(1)이다.
+
 		System.out.println(resultList.toString().replace('[','<').replace(']','>'));
 
 		br.close();
