@@ -1,11 +1,13 @@
 package stack;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayDeque;
 import java.util.StringTokenizer;
 
 /*
- * Date: 2019. 07. 11
+ * Date: 2019. 07. 09
  * Author: KimJye | https://github.com/KimJye
  * Solution URL: https://github.com/KimJye/algorithm
  * Problem URL : https://www.acmicpc.net/problem/10828
@@ -24,72 +26,32 @@ import java.util.StringTokenizer;
 					    문제에 나와있지 않은 명령이 주어지는 경우는 없다.
 
                  출력 : 출력해야하는 명령이 주어질 때마다, 한 줄에 하나씩 출력한다.
+
+ * solution : ArrayDeque
+ * 			  Java의 Stack 클래스는 Vector 클래스를 상속 받기 때문에, 일반적인 용도로 사용하기에 적절치 않다.
+  			  ArrayDeque 클래스나 LinkedList 클래스를 스택 용도로 사용하면 된다.
+
  */
-public class P10828 {
-	static class Stack<T>{
+public class P10828v2 {
 
-		Object[] data;
-		int count;
-
-		public Stack(int n){
-			data = new Object[n];
-			count=0;
-		}
-
-		public boolean isFull(){
-			return data.length == count;
-		}
-
-		public boolean isEmpty(){
-			return count == 0;
-		}
-
-		public int size(){
-			return count;
-		}
-
-		public void push(T value) throws Exception{
-			if(isFull()) throw new Exception("full");
-			data[count++]=value;
-		}
-
-		public T pop() throws Exception{
-			if(isEmpty()) throw new Exception("empty");
-			return (T)data[--count];
-		}
-
-		public T top() throws Exception{
-			if(isEmpty()) throw new Exception("empty");
-			return (T)data[count-1];
-		}
-	}
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int N = Integer.parseInt(br.readLine());
-		Stack stack = new Stack(N);
 
-		while (N-- > 0) {
+		int N = Integer.parseInt(br.readLine());
+
+		ArrayDeque<Integer> stack = new ArrayDeque<>();
+
+		while(N-- >0){
 			StringTokenizer st = new StringTokenizer(br.readLine());
 			String cmd = st.nextToken();
-
-			switch (cmd) {
-				case "push":
-					stack.push(Integer.parseInt(st.nextToken()));
-					break;
-				case "pop":
-					System.out.println(stack.size() > 0 ? stack.pop() : -1);
-					break;
-				case "size":
-					System.out.println(stack.size());
-					break;
-				case "empty":
-					System.out.println(stack.isEmpty() ? 1 : 0);
-					break;
-				case "top" :
-					System.out.println(stack.size() > 0 ? stack.top() : -1);
+			switch (cmd){
+				case "push" : stack.push(Integer.parseInt(st.nextToken())); break;
+				case "top" : System.out.println(stack.size()>0 ? stack.peek(): -1); break;
+				case "size" : System.out.println(stack.size()); break;
+				case "empty" : System.out.println(stack.isEmpty() ? 1 : 0); break;
+				case "pop" : System.out.println(stack.size()>0 ? stack.pop() : -1); break;
 			}
 		}
 		br.close();
 	}
-
 }
